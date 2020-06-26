@@ -12,7 +12,15 @@ class Datacenter:
         """
 
         self.name = name
-        self.clusters = cluster_dict
+
+        self.clusters = [
+            Cluster(
+                name=key,
+                security_level=value['security_level'],
+                network_dict=value['networks']
+            )
+            for key, value in cluster_dict.items()
+        ]
 
     def remove_invalid_clusters(self):
         """
@@ -24,16 +32,9 @@ class Datacenter:
         clusters = self.clusters
         to_remove = []
 
-        for key, value in clusters.items():
-            cluster = Cluster(
-                name=key,
-                security_level=value['security_level'],
-                network_dict=value['networks']
-            )
+        for cluster in clusters:
             pattern = re.compile(re_string)
-
             if not pattern.match(cluster.name):
-                to_remove.append(key)
+                to_remove.append(cluster.name)
 
-        for rm_key in to_remove:
-            del clusters[rm_key]
+        self.clusters = filter(lambda x: x.name not in to_remove, clusters)

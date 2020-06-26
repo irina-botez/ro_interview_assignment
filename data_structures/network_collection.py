@@ -1,3 +1,6 @@
+from .entry import Entry
+
+
 class NetworkCollection:
     def __init__(self, ipv4_network, raw_entry_list):
         """
@@ -8,7 +11,14 @@ class NetworkCollection:
         """
 
         self.ipv4_network = ipv4_network
-        self.entries = raw_entry_list
+        self.entries = [
+            Entry(
+                address=entry['address'],
+                available=entry['available'],
+                last_used=entry['last_used']
+            )
+            for entry in raw_entry_list
+        ]
 
     def remove_invalid_records(self):
         """

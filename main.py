@@ -21,7 +21,7 @@ def get_data(url, max_retries=5, delay_between_retries=1):
 
     while ok_request == 0 and max_retries > 0:
         try:
-            req = requests.get(url=URL)
+            req = requests.get(url=url)
             if req.status_code not in range(200,300):
                 return None
             ok_request = 1
@@ -31,6 +31,7 @@ def get_data(url, max_retries=5, delay_between_retries=1):
             max_retries -= 1
 
     return None
+
 
 def main():
     """
