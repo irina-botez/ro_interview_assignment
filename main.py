@@ -47,7 +47,8 @@ def main():
         for key, value in data.items()
     ]
 
-    pass  # the rest of your logic here
+    for dc in datacenters:
+        dc.remove_invalid_clusters()
 
 
 if __name__ == '__main__':

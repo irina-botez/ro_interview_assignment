@@ -1,3 +1,7 @@
+import re
+from .cluster import Cluster
+
+
 class Datacenter:
     def __init__(self, name, cluster_dict):
         """
@@ -14,5 +18,22 @@ class Datacenter:
         """
         Removes invalid objects from the clusters list.
         """
+        valid_cluster_start = self.name[:3].upper()
+        re_string = r'^{}-\d{{1,3}}$'.format(valid_cluster_start)
 
-        pass
+        clusters = self.clusters
+        to_remove = []
+
+        for key, value in clusters.items():
+            cluster = Cluster(
+                name=key,
+                security_level=value['security_level'],
+                network_dict=value['networks']
+            )
+            pattern = re.compile(re_string)
+
+            if not pattern.match(cluster.name):
+                to_remove.append(key)
+
+        for rm_key in to_remove:
+            del clusters[rm_key]
