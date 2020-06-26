@@ -1,0 +1,9 @@
+.idea/*
+*/__pycache__/
+
+
+# virtualenv stuff
+bin/*
+include/*
+lib/*
+share/*
