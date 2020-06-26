@@ -1,3 +1,4 @@
+from ipaddress import IPv4Network
 from .entry import Entry
 
 
@@ -10,7 +11,7 @@ class NetworkCollection:
         self.entries -> list(Entry)
         """
 
-        self.ipv4_network = ipv4_network
+        self.ipv4_network = IPv4Network(ipv4_network)
         self.entries = [
             Entry(
                 address=entry['address'],
