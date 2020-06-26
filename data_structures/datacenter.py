@@ -7,7 +7,8 @@ class Datacenter:
         self.clusters -> list(Cluster)
         """
 
-        pass
+        self.name = name
+        self.clusters = cluster_dict
 
     def remove_invalid_clusters(self):
         """

@@ -8,4 +8,6 @@ class Cluster:
         self.networks -> list(NetworkCollection)
         """
 
-        pass
+        self.name = name
+        self.security_level = security_level
+        self.networks = network_dict
