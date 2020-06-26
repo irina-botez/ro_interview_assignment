@@ -1,3 +1,4 @@
+import requests
 from data_structures.datacenter import Datacenter
 
 
@@ -16,8 +17,20 @@ def get_data(url, max_retries=5, delay_between_retries=1):
     Returns:
         data (dict)
     """
-    pass  # the rest of your logic here
+    ok_request = 0
 
+    while ok_request == 0 and max_retries > 0:
+        try:
+            req = requests.get(url=URL)
+            if req.status_code not in range(200,300):
+                return None
+            ok_request = 1
+            return req.json()
+        except requests.exceptions.RequestException as e:
+            print("\nAttempt {} of 5 FAILED: {}\n".format(5-max_retries+1, e))
+            max_retries -= 1
+
+    return None
 
 def main():
     """
