@@ -28,13 +28,15 @@ class Datacenter:
         """
         valid_cluster_start = self.name[:3].upper()
         re_string = r'^{}-\d{{1,3}}$'.format(valid_cluster_start)
+        pattern = re.compile(re_string)
 
         clusters = self.clusters
         to_remove = []
 
         for cluster in clusters:
-            pattern = re.compile(re_string)
             if not pattern.match(cluster.name):
                 to_remove.append(cluster.name)
 
-        self.clusters = filter(lambda x: x.name not in to_remove, clusters)
+        self.clusters = list(
+            filter(lambda x: x.name not in to_remove, clusters)
+        )
