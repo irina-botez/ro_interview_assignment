@@ -14,3 +14,16 @@ class Entry:
         self.address = address
         self.available = available
         self.last_used = datetime.strptime(last_used, "%d/%m/%y %H:%M:%S")
+
+    def ip_to_decimal(self):
+        blocks = self.address.split('.')
+        decimal = 0
+        for idx, block in enumerate(blocks):
+            decimal += 256**(4-idx-1) * int(block)
+
+        return decimal
+
+    def __lt__(self, other):
+        return self.ip_to_decimal() < other.ip_to_decimal()
+
+

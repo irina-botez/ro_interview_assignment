@@ -22,6 +22,9 @@ class NetworkCollection:
             for entry in raw_entry_list
         ]
 
+        self.remove_invalid_records()
+        self.sort_records()
+
     def remove_invalid_records(self):
         """
         Removes invalid objects from the entries list.
@@ -47,7 +50,6 @@ class NetworkCollection:
         self.entries = list(filter(
             lambda x: x.address not in to_remove, self.entries
         ))
-
 
     def sort_records(self):
         """
