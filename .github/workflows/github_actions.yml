@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -19,3 +19,9 @@ jobs:
     
     - name: Test invalid clusters
       run: python -m unittest tests/test_remove_invalid_clusters.py
+
+    - name: Test invalid records
+      run: python -m unittest tests/test_remove_invalid_records.py
+
+    - name: Test sort records
+      run: python -m unittest tests/test_sort_records.py
