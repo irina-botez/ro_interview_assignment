@@ -25,7 +25,11 @@ class Datacenter:
         """
         Removes invalid objects from the clusters list.
         """
+
+        # First three uppercase letters of the parent Datacenter
         valid_cluster_start = self.name[:3].upper()
+
+        # Valid Cluster name pattern
         re_string = r'^{}-\d{{1,3}}$'.format(valid_cluster_start)
         pattern = re.compile(re_string)
 

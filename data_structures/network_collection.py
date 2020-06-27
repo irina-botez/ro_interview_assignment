@@ -30,6 +30,8 @@ class NetworkCollection:
         Removes invalid objects from the entries list.
         """
         to_remove = []
+
+        # A.B.C.D -> A, B, C, D are numbers in range 0-255
         nr_block = '[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]'
         re_string = r'^({0})\.({0})\.({0})\.({0})$'.format(nr_block)
         pattern = re.compile(re_string)
