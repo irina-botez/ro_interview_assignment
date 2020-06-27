@@ -34,10 +34,10 @@ class NetworkCollection:
         for entry in self.entries:
             invalid = False
 
-            if not pattern.match(entry.address) :
+            if not pattern.match(entry.address):
                 invalid = True
-            if not invalid and \
-               IPv4Address(entry.address) not in self.ipv4_network:
+            if (not invalid
+                    and IPv4Address(entry.address) not in self.ipv4_network):
                 invalid = True
 
             if invalid:

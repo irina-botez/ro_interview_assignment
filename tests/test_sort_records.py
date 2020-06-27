@@ -11,7 +11,7 @@ class TestRemoveRecords(unittest.TestCase):
 
     def test_ip_decimal_value(self):
         print("Start ip_to_decimal Test...\n")
-        entry =  Entry('192.168.203.20', True, '30/01/20 17:00:00')
+        entry = Entry('192.168.203.20', True, '30/01/20 17:00:00')
         self.assertEqual(entry.ip_to_decimal(), 3232287508)
 
     def test_remove_invalid_clusters(self):

@@ -25,5 +25,3 @@ class Entry:
 
     def __lt__(self, other):
         return self.ip_to_decimal() < other.ip_to_decimal()
-
-
