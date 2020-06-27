@@ -1,9 +1,9 @@
 import unittest
 from .get_test_data import get_data
-from data_structures.datacenter import Datacenter
-from data_structures.cluster import Cluster
+from datetime import datetime
 from data_structures.network_collection import NetworkCollection
 from data_structures.entry import Entry
+from ipaddress import IPv4Network
 
 
 # The addresses here are either invalid OR
@@ -32,9 +32,19 @@ INVALID_ADDRESSES = {
 class TestRemoveRecords(unittest.TestCase):
     data = get_data()
 
-    def check_datacenter(self, datacenter):
-        print('\nChecking DataCenter type...\n')
-        self.assertIsInstance(datacenter, Datacenter)
+    def check_entries(self, entries):
+        print('\nChecking entries...\n')
+        for entry in entries:
+            self.assertIsInstance(entry, Entry)
+            self.assertIs(type(entry.address), str)
+            self.assertIs(type(entry.last_used), datetime)
+            self.assertIs(type(entry.available), bool)
+
+    def check_networks(self, networks):
+        print('\nChecking networks...\n')
+        for network in networks:
+            self.assertIsInstance(network, NetworkCollection)
+            self.assertIs(type(network.ipv4_network), IPv4Network)
 
     def test_remove_invalid_clusters(self):
         print("Start Remove Invalid Records Test...\n")
@@ -43,13 +53,13 @@ class TestRemoveRecords(unittest.TestCase):
             print('\nLooking into DataCenter "{}"\n...'.format(
                 dc.name
             ))
-            self.check_datacenter(dc)
             dc.remove_invalid_clusters()
 
             for cluster in dc.clusters:
                 print('\n\n\nDataCenter "{}" ---> Cluster "{}"\n'.format(
                     dc.name, cluster.name
                 ))
+                self.check_networks(cluster.networks)
 
                 for network in cluster.networks:
                     print(
@@ -58,6 +68,8 @@ class TestRemoveRecords(unittest.TestCase):
                     )
                     network.remove_invalid_records()
                     net_address_str = str(network.ipv4_network)
+
+                    self.check_entries(network.entries)
 
                     if net_address_str in INVALID_ADDRESSES.keys():
                         net_valid_addresses = [
