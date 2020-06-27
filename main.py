@@ -28,7 +28,7 @@ def get_data(url, max_retries=5, delay_between_retries=1):
             time.sleep(delay_between_retries)
             max_retries -= 1
 
-    return None
+    return {}
 
 
 def main():
