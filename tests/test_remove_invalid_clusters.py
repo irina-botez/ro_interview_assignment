@@ -1,18 +1,8 @@
-import json
 import unittest
-from data_structures.datacenter import Datacenter
+from .get_test_data import get_data
 
 
 INVALID_CLUSTERS = ['BER-4000', 'TEST-1', 'XPAR-2']
-
-
-def get_data():
-    with open('response.json') as json_file:
-        data = json.load(json_file)
-        return [
-            Datacenter(key, value)
-            for key, value in data.items()
-        ]
 
 
 class TestRemoveClusters(unittest.TestCase):
@@ -24,7 +14,7 @@ class TestRemoveClusters(unittest.TestCase):
         valid_clusters = []
 
         for dc in self.data:
-            print('\nRemoving DataCenter {}\'s invalid clusters\n...'.format(
+            print('\nRemoving DataCenter {}\'s invalid clusters...\n'.format(
                 dc.name
             ))
             dc.remove_invalid_clusters()

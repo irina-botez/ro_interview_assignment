@@ -22,9 +22,6 @@ class NetworkCollection:
             for entry in raw_entry_list
         ]
 
-        self.remove_invalid_records()
-        self.sort_records()
-
     def remove_invalid_records(self):
         """
         Removes invalid objects from the entries list.
