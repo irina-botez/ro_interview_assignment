@@ -29,6 +29,7 @@ INVALID_ADDRESSES = {
     ]
 }
 
+
 class TestRemoveRecords(unittest.TestCase):
     data = get_data()
 
