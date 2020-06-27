@@ -27,7 +27,7 @@ def get_data(url, max_retries=5, delay_between_retries=1):
             ok_request = 1
             return req.json()
         except requests.exceptions.RequestException as e:
-            print("\nAttempt {} of 5 FAILED: {}\n".format(5-max_retries+1, e))
+            print("\nAttempt {} of 5 FAILED: {}\n".format(6-max_retries, e))
             max_retries -= 1
 
     return None

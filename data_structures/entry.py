@@ -19,7 +19,7 @@ class Entry:
         blocks = self.address.split('.')
         decimal = 0
         for idx, block in enumerate(blocks):
-            decimal += 256**(4-idx-1) * int(block)
+            decimal += 256**(3-idx) * int(block)
 
         return decimal
 
