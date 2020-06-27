@@ -1,4 +1,5 @@
 import requests
+import time
 from data_structures.datacenter import Datacenter
 
 
@@ -23,11 +24,12 @@ def get_data(url, max_retries=5, delay_between_retries=1):
         try:
             req = requests.get(url=url)
             if req.status_code not in range(200,300):
-                return None
+                raise requests.exceptions.RequestException('Bad status code')
             ok_request = 1
             return req.json()
         except requests.exceptions.RequestException as e:
             print("\nAttempt {} of 5 FAILED: {}\n".format(6-max_retries, e))
+            time.sleep(delay_between_retries)
             max_retries -= 1
 
     return None
