@@ -1,5 +1,9 @@
 import unittest
 from .get_test_data import get_data
+from data_structures.datacenter import Datacenter
+from data_structures.cluster import Cluster
+from data_structures.network_collection import NetworkCollection
+from data_structures.entry import Entry
 
 
 # The addresses here are either invalid OR
@@ -25,9 +29,12 @@ INVALID_ADDRESSES = {
     ]
 }
 
-
 class TestRemoveRecords(unittest.TestCase):
     data = get_data()
+
+    def check_datacenter(self, datacenter):
+        print('\nChecking DataCenter type...\n')
+        self.assertIsInstance(datacenter, Datacenter)
 
     def test_remove_invalid_clusters(self):
         print("Start Remove Invalid Records Test...\n")
@@ -36,6 +43,9 @@ class TestRemoveRecords(unittest.TestCase):
             print('\nLooking into DataCenter "{}"\n...'.format(
                 dc.name
             ))
+            self.check_datacenter(dc)
+            dc.remove_invalid_clusters()
+
             for cluster in dc.clusters:
                 print('\n\n\nDataCenter "{}" ---> Cluster "{}"\n'.format(
                     dc.name, cluster.name

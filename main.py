@@ -18,14 +18,10 @@ def get_data(url, max_retries=5, delay_between_retries=1):
     Returns:
         data (dict)
     """
-    ok_request = 0
-
-    while ok_request == 0 and max_retries > 0:
+    while max_retries > 0:
         try:
             req = requests.get(url=url)
-            if req.status_code not in range(200, 300):
-                raise requests.exceptions.RequestException('Bad status code')
-            ok_request = 1
+            req.raise_for_status()
             return req.json()
         except requests.exceptions.RequestException as e:
             print("\nAttempt {} of 5 FAILED: {}\n".format(6-max_retries, e))
@@ -45,10 +41,10 @@ def main():
     if not data:
         raise ValueError('No data to process')
 
-    datacenters = [
+    datacenters = (
         Datacenter(key, value)
         for key, value in data.items()
-    ]
+    )
 
     for dc in datacenters:
         dc.remove_invalid_clusters()

@@ -12,7 +12,6 @@ class Datacenter:
         """
 
         self.name = name
-
         self.clusters = [
             Cluster(
                 name=key,

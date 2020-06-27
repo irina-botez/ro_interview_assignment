@@ -18,6 +18,10 @@ class TestRemoveRecords(unittest.TestCase):
         print("Start Remove Invalid Records Test...\n")
 
         berlin_dc = self.data[0]
+
+        # Remove invalid clusters
+        berlin_dc.remove_invalid_clusters()
+
         test_cluster = berlin_dc.clusters[0]
         test_network = test_cluster.networks[0]
 
